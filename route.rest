@@ -16,12 +16,11 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:3000/subscribers/5d9e35dce035123a1ea52fa2
+PATCH http://localhost:3000/subscribers/5d9e35dce035123a1ea52fa2
 Content-Type: application/json
 
 {
-    "name": "Amazing AMAZING Person",
-     "subscribedToChannel": "Web dev simplified"
+    "name": "Amazing AMAZING So AMAZING Person"
 }
 
 ###

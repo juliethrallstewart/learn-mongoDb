@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 
+//automatically gets id
 const subscriberSchema = new mongoose.Schema({
     name: {
         type: String,
