@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { AgGridReact } from 'ag-grid-react';
+import Link from 'next/link';
+
 import '../node_modules/ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham-dark.css';
@@ -50,11 +52,22 @@ const Grid = (props) => {
 
             console.log(selectedData)
             const selectedDataStringPresentation = selectedData.map( node => node.name + ' ' + node.subscribedToChannel).join(', ')
-            
-            alert(`Selected nodes: ${selectedDataStringPresentation}`)
+            console.log(selectedDataStringPresentation)
+         
+            alert(`Selected nodes: ${selectedDataStringPresentation}`) 
+        
             }
         
             const onBtPrint = () => {
+                gridApi = gridApi;
+                setPrinterFriendly(gridApi);
+                setTimeout(function() {
+                  print();
+                  setNormal(gridApi);
+                }, 2000);
+              }
+
+              const onBtPrinterFriendly = () => {
                 gridApi = gridApi;
                 setPrinterFriendly(gridApi);
                 setTimeout(function() {
@@ -68,9 +81,11 @@ const Grid = (props) => {
     return (
         <>
    
-    <div style={{ height: '200px', maxWidth: '800px', margin: '0 auto' }} className="ag-theme-blue my-grid">
+    <div style={{ height: '200px', maxWidth: '1000px', margin: '0 auto' }} className="ag-theme-blue my-grid">
      <button onClick={onButtonClick}>Get selected rows</button>
      <button onClick={onBtPrint.bind(this)}>Print</button>
+     <button onClick={onBtPrinterFriendly.bind(this)}>Printer Friendly</button>
+
  
         <AgGridReact
             onGridReady={ params => gridApi = params.api }
@@ -92,7 +107,7 @@ function setPrinterFriendly(api) {
   }
   function setNormal(api) {
     var eGridDiv = document.querySelector(".my-grid");
-    eGridDiv.style.width = "800px";
+    eGridDiv.style.width = "1000px";
     eGridDiv.style.height = "200px";
     api.setDomLayout(null);
   }
